@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+    background: linear-gradient(135deg, #010203 0%, #0d1117 50%, #0a0f1f 100%);
+  }
+}
+
+@layer components {
+  /* Cybersecurity glow effects */
+  .glow-cyan {
+    @apply shadow-lg shadow-cyan-500/20;
+  }
+
+  .glow-cyan-lg {
+    @apply shadow-2xl shadow-cyan-500/40;
+  }
+
+  .border-cyan-neon {
+    @apply border border-cyan-500/40 hover:border-cyan-500/60 transition-colors;
+  }
+
+  /* Status indicator badges */
+  .status-secure {
+    @apply bg-green-500/20 text-green-300 border border-green-500/30 px-3 py-1.5 rounded-md text-sm font-medium;
+  }
+
+  .status-warning {
+    @apply bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 px-3 py-1.5 rounded-md text-sm font-medium;
+  }
+
+  .status-danger {
+    @apply bg-red-500/20 text-red-300 border border-red-500/30 px-3 py-1.5 rounded-md text-sm font-medium;
+  }
+
+  /* Cyber card styling */
+  .cyber-card {
+    @apply bg-slate-950/80 border border-cyan-500/20 backdrop-blur-sm hover:border-cyan-500/40 hover:shadow-lg hover:shadow-cyan-500/10 transition-all;
+  }
+
+  /* Monospace cyan text */
+  .font-mono-cyan {
+    @apply font-mono text-cyan-400 text-sm;
+  }
+
+  /* Scan line overlay effect */
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+  }
+
+  /* Grid background pattern */
+  .grid-bg {
+    background-image: 
+      linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.05) 75%, rgba(0, 255, 255, 0.05) 76%, transparent 77%, transparent),
+      linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.05) 75%, rgba(0, 255, 255, 0.05) 76%, transparent 77%, transparent);
+    background-size: 60px 60px;
+  }
+}
