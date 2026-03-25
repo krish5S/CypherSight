@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import CircularStats from '../components/CircularStats'
 
 function SideCard({ title, description, icon, onClick }) {
@@ -19,7 +20,8 @@ function SideCard({ title, description, icon, onClick }) {
   )
 }
 
-export default function Dashboard({ setCurrentPage }) {
+export default function Dashboard() {
+  const navigate = useNavigate()
   const output = {
     percent: 78,
     justification:
@@ -43,13 +45,13 @@ export default function Dashboard({ setCurrentPage }) {
           </p>
           <div className="flex gap-4 flex-wrap">
             <button
-              onClick={() => setCurrentPage('messages')}
+              onClick={() => navigate('/messages')}
               className="px-6 py-2.5 rounded-lg border border-gray-300/30 text-gray-300 font-medium hover:border-gray-300/60 transition"
             >
               Check a message
             </button>
             <button
-              onClick={() => setCurrentPage('urls')}
+              onClick={() => navigate('/urls')}
               className="px-6 py-2.5 rounded-lg bg-cyan-500/90 text-black font-semibold hover:bg-cyan-400 transition glow-cyan"
             >
               Check a URL
@@ -69,19 +71,19 @@ export default function Dashboard({ setCurrentPage }) {
             icon="💬"
             title="Messages Check"
             description="Paste a message and get fraud likelihood + justification."
-            onClick={() => setCurrentPage('messages')}
+            onClick={() => navigate('/messages')}
           />
           <SideCard
             icon="🔗"
             title="URL Check"
             description="Analyze suspicious links for common scam signals."
-            onClick={() => setCurrentPage('urls')}
+            onClick={() => navigate('/urls')}
           />
           <SideCard
             icon="🖼️"
             title="Image Check"
             description="Upload an image to check for morphing/manipulation cues."
-            onClick={() => setCurrentPage('images')}
+            onClick={() => navigate('/images')}
           />
         </div>
 

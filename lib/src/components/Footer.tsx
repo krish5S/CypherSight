@@ -1,4 +1,6 @@
-export default function Footer({ setCurrentPage }) {
+import { Link } from 'react-router-dom'
+
+export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
@@ -16,36 +18,36 @@ export default function Footer({ setCurrentPage }) {
             <h3 className="uppercase text-sm font-semibold text-cyan-400 mb-4">Modules</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <button
-                  onClick={() => setCurrentPage('dashboard')}
+                <Link
+                  to="/dashboard"
                   className="hover:text-cyan-400 transition"
                 >
                   Dashboard
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('messages')}
+                <Link
+                  to="/messages"
                   className="hover:text-cyan-400 transition"
                 >
                   Messages Check
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('urls')}
+                <Link
+                  to="/urls"
                   className="hover:text-cyan-400 transition"
                 >
                   URL Check
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => setCurrentPage('images')}
+                <Link
+                  to="/images"
                   className="hover:text-cyan-400 transition"
                 >
                   Image Check
-                </button>
+                </Link>
               </li>
             </ul>
           </div>

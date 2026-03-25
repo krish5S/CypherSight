@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function toneForPercent(p) {
   if (p < 50) return 'green'
@@ -6,7 +7,8 @@ function toneForPercent(p) {
   return 'yellow'
 }
 
-export default function MessageCheck({ setCurrentPage }) {
+export default function MessageCheck() {
+  const navigate = useNavigate()
   const [text, setText] = useState('')
   const [result, setResult] = useState(null)
 
@@ -122,7 +124,7 @@ export default function MessageCheck({ setCurrentPage }) {
       {/* Back button */}
       <div className="mt-8 text-center">
         <button
-          onClick={() => setCurrentPage('dashboard')}
+          onClick={() => navigate('/dashboard')}
           className="px-6 py-2 rounded-lg border border-cyan-500/30 text-cyan-400 font-medium hover:border-cyan-500/60 transition"
         >
           Back to Dashboard
