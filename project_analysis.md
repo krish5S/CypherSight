@@ -24,21 +24,17 @@
 
 ## 📁 Project Structure
 
-The project has **two parallel codebases**:
+The project follows a standard **Vite + React** architecture:
 
-### 1. Main App Entry (`app/`)  — Next.js-style layout
-- [page.tsx](file:///c:/Users/admin/OneDrive/coding/BigDawgs_CypherSight/app/page.tsx) — Single-page landing with all sections inlined (~296 lines)
-- [layout.tsx](file:///c:/Users/admin/OneDrive/coding/BigDawgs_CypherSight/app/layout.tsx) — Root layout
-- [globals.css](file:///c:/Users/admin/OneDrive/coding/BigDawgs_CypherSight/app/globals.css) — Global styles
-
-### 2. Vite SPA Source (`lib/src/`) — Modular component architecture
-- [App.jsx](file:///c:/Users/admin/OneDrive/coding/BigDawgs_CypherSight/lib/src/App.jsx) — Main app with client-side routing via `useState`
+### Source (`src/`) — Modular component architecture
+- [main.tsx](src/main.tsx) — Entry point
+- [App.tsx](src/App.tsx) — Main app with client-side routing
 - **Components:** Header, Footer, CircularStats, ToneBlock
 - **Pages:** Dashboard, MessageCheck, UrlCheck, ImageCheck
 - **Lib:** constants.js, helpers.js (utilities)
 
-### 3. UI Components (`components/ui/`) — 57 shadcn/ui components
-Includes: Button, Card, Dialog, Sidebar, Toast, Tabs, Chart, Form, and more.
+### UI Components (`components/ui/`)
+Includes shadcn/ui components (Button, Card, Dialog, etc).
 
 ---
 
@@ -89,7 +85,6 @@ Includes: Button, Card, Dialog, Sidebar, Toast, Tabs, Chart, Form, and more.
 | Issue | Detail |
 |---|---|
 | **No backend / API** | All detection is client-side pattern matching (demo mode). No ML model integration yet |
-| **Dual codebase confusion** | `app/page.tsx` (Next.js-style) and `lib/src/App.jsx` (Vite SPA) appear to be overlapping implementations. The Vite config points to the Vite SPA, but `app/` follows Next.js conventions |
 | **No routing library** | Navigation uses `useState` instead of React Router or file-based routing |
 | **No authentication** | No user accounts or session management |
 | **No history/persistence** | Scan results are not saved; no analysis history |

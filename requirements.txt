@@ -1,12 +1,19 @@
-fastapi
-uvicorn
-pydantic
-python-multipart
-python-dotenv
-requests
-transformers
-torch
-numpy
-pandas
-shap
-opencv-python
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.1
+python-dotenv>=1.0.1
+pydantic>=2.6.3
+
+# NLP / Phishing
+transformers>=4.38.2
+torch>=2.2.1 --index-url https://download.pytorch.org/whl/cpu
+sentencepiece>=0.2.0
+
+# URL analysis
+requests>=2.31.0
+tldextract>=5.1.1
+python-whois>=0.9.4
+
+# Image / Deepfake
+Pillow>=10.2.0
+numpy>=1.26.4
+scipy>=1.12.0

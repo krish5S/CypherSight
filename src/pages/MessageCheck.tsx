@@ -11,33 +11,39 @@ export default function MessageCheck() {
   const navigate = useNavigate()
   const [text, setText] = useState('')
   const [result, setResult] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const canAnalyze = text.trim().length > 0
+  const canAnalyze = text.trim().length > 0 && !isLoading
 
-  const demoAnalyze = () => {
-    const t = text.toLowerCase()
-    const signals = [
-      t.includes('otp') ? 'Mentions OTP' : null,
-      t.includes('urgent') || t.includes('immediately') ? 'Urgency/pressure language' : null,
-      t.includes('upi') || t.includes('bank') ? 'Payment context' : null,
-      t.includes('click') || t.includes('link') ? 'Link/click request' : null,
-    ].filter(Boolean)
-
-    const base = 35
-    const score = Math.min(95, base + signals.length * 15)
-    setResult({
-      percent: score,
-      justification:
-        signals.length > 0
-          ? `Signals detected: ${signals.join(', ')}.`
-          : 'No strong scam keywords detected. Consider verifying the sender and context.',
-      action:
-        score > 70
-          ? 'Avoid replying, do not share OTP, verify via official channel, and report/block.'
-          : score < 50
-            ? 'Proceed with caution. Verify sender identity if anything feels off.'
-            : 'Be cautious. Do not click unknown links; verify sender and request details.',
-    })
+  const handleAnalyze = async () => {
+    try {
+      setIsLoading(true)
+      const response = await fetch('http://localhost:8000/analyze/phishing', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: text }),
+      })
+      if (!response.ok) {
+        throw new Error('Analysis failed')
+      }
+      const data = await response.json()
+      setResult({
+        percent: data.percent,
+        justification: data.justification,
+        action: data.action,
+      })
+    } catch (error) {
+      console.error(error)
+      setResult({
+        percent: 0,
+        justification: 'Error connecting to the server. Please ensure the backend is running.',
+        action: 'Check your connection or try again later.',
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const tone = useMemo(() => toneForPercent(result?.percent ?? 0), [result?.percent])
@@ -84,11 +90,11 @@ export default function MessageCheck() {
           <div className="flex items-center justify-between gap-3">
             <div className="text-sm text-gray-400">Tip: include the exact wording (no edits).</div>
             <button
-              onClick={demoAnalyze}
+              onClick={handleAnalyze}
               disabled={!canAnalyze}
               className="px-4 py-2 rounded-lg bg-cyan-500/90 text-black font-semibold hover:bg-cyan-400 transition disabled:opacity-50 disabled:cursor-not-allowed glow-cyan"
             >
-              Analyze
+              {isLoading ? 'Analyzing...' : 'Analyze'}
             </button>
           </div>
         </div>
