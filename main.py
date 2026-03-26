@@ -29,7 +29,7 @@ frontend_origins = [
     origin.strip()
     for origin in getenv(
         "FRONTEND_ORIGINS",
-        "http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:5173",
+        "http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:3003,http://localhost:3004,http://localhost:3005,http://localhost:5173",
     ).split(",")
     if origin.strip()
 ]
@@ -80,4 +80,4 @@ def analyze_deepfake(payload: DeepfakeAnalysisRequest) -> dict:
     try:
         return deepfake_detector_instance.analyze_image(payload.media_reference)
     except Exception as exc:
-        raise HTTPException(status_code=500, detail=str(exc))
+        raise HTTPException(status_code=500, detail=str(exc)) 
